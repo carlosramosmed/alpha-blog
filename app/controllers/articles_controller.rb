@@ -37,4 +37,11 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def destroy
+    @article = Article.find(params[:id])
+    @article.destroy
+    flash[:notice] = "Article with id #{params[:id]} deleted!"
+    redirect_to articles_path #articles_path redirects to the index view by default
+  end
+
 end
