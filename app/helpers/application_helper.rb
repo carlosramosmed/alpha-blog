@@ -8,4 +8,12 @@ module ApplicationHelper
     image_tag(gravatar_for, alt: user.username, class: "rounded shadow mx-auto d-block mb-4")
   end
 
+  def alert_classname name
+    if (name == "notice")
+      "success"
+    else
+      "danger"
+    end
+  end
+
 end
