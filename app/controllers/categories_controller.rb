@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  before_action :set_category, only: %i[show]
 
   def new
     @category = Category.new
