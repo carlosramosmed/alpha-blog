@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :find_user, only: %i[show edit update]
+  before_action :require_user, only: %i[edit update]
+  before_action :require_same_user, only: %i[edit update]
 
   def new
     @user = User.new
@@ -44,6 +46,13 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:username, :email, :password)
+  end
+
+  def require_same_user
+    if current_user != @user
+      flash[:alert] = "You can only edit your own profile!"
+      redirect_to @user
+    end
   end
 
 end
